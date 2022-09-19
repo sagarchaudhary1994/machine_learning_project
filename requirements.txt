@@ -1,3 +1,5 @@
 Flask
-Flask
 gunicorn
+numpy
+sklearn
+pandas
