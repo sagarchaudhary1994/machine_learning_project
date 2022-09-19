@@ -62,3 +62,15 @@ Push your changes to remote repo
 ```
 git push origin <current branch>
 ```
+
+Check remote url
+
+```
+git remote -v
+```
+
+Check the current branch
+
+```
+git branch
+```
