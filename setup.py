@@ -1,12 +1,11 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 from typing import List
 
 # Declaring variable for setup
 PROJECT_NAME = "housing-predictor"
-PROJECT_VERSION = "0.0.1"
+PROJECT_VERSION = "0.0.3"
 PROJECT_AUTHOR = "Sagar Chaudhary"
 PROJECT_DESC = "first end to end ml project"
-PACKAGES = ["housing"]
 REQUIREMENT_FILE_NAME = "requirements.txt"
 
 
@@ -19,7 +18,7 @@ def get_requirements_list() -> List[str]:
     of libraries mentioned in the requirements.txt
     """
     with open(REQUIREMENT_FILE_NAME) as requirement_file:
-        return requirement_file.readlines()
+        return requirement_file.readlines().remove("-e .")
 
 
 setup(
@@ -27,9 +26,6 @@ setup(
     version=PROJECT_VERSION,
     author=PROJECT_AUTHOR,
     description=PROJECT_DESC,
-    packages=PACKAGES,
+    packages=find_packages(),
     install_requires=get_requirements_list()
 )
-
-if __name__ == "__main__":
-    print(get_requirements_list())
