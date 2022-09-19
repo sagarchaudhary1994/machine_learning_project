@@ -26,3 +26,39 @@ Install requirements.txt
 ```
 pip install -r requirements.txt
 ```
+
+Add files to git
+
+```
+git add .
+```
+
+Add a file to git
+
+```
+git add <filename>
+```
+
+Check the git status
+
+```
+git status
+```
+
+Check the git log
+
+```
+git log
+```
+
+Commit changes to local repo
+
+```
+git commit -m <commit message>
+```
+
+Push your changes to remote repo
+
+```
+git push origin <current branch>
+```
