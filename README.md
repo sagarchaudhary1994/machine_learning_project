@@ -77,9 +77,9 @@ git branch
 
 Set Up CI/CD on Heroku app, we need 3 information to set this up
 
-1. HEROKU_EMAIL = sagarchaudhary1994@gmail.com
-2. HEROKU_API_KEY = b6d0df6c-d951-4853-8a7a-f115fb143979
-3. HEROKU_APP_NAME = mlendtoend
+1. HEROKU_EMAIL = <>
+2. HEROKU_API_KEY = <>
+3. HEROKU_APP_NAME = <>
 
 Build Docker Image
 
@@ -103,11 +103,13 @@ docker run -p 5000:5000 -e PORT=5000 b3abf9a2e2ab
 ```
 
 To check running containers in docker
+
 ```
 docker ps
 ```
 
 TO stop the docker container
+
 ```
 docker stop <container_id>
 ```
