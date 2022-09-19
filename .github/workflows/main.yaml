@@ -22,13 +22,13 @@ jobs:
           #Below you must provide the variable for your heroku app
           
           # The email address associated with your heroku account
-          email: ${{secrets.HEROKU_EMAIL}}
+          email: ${{ secrets.HEROKU_EMAIL }}
 
           #Heroku api key
-          heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+          heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
 
           #Heroku App Name
-          heroku_app_name : ${{secrets.HEROKU_APP_NAME}}
+          heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
 
           #Docker Directory
           dockerfile_directory: ./
