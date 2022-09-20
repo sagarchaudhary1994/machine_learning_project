@@ -3,4 +3,5 @@ gunicorn
 numpy
 sklearn
 pandas
+PyYAML
 -e .

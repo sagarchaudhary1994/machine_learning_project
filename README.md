@@ -118,6 +118,14 @@ TO stop the docker container
 docker stop <container_id>
 ```
 
+Install module to run jupyter notebook in VS Code
+
 ```
 install ipykernel
+```
+
+Install module to run YAML file in jupyter notebook
+
+```
+pip install PyYAML
 ```
