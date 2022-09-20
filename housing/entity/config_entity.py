@@ -5,7 +5,7 @@ DataIngestionConfig = namedtuple("DataIngestionConfig",
                                   "raw_data_dir", "ingested_train_dir", "ingested_test_dir"])
 
 DataValidationConfig = namedtuple("DataValidationConfig",
-                                  ["schema_file_path"])
+                                  ["schema_file_path", "validation_report_file_name", "validation_html_file_name", "validator_obj_file_path"])
 
 DataTransformationConfig = namedtuple("DataTransformationConfig",
                                       ["add_bedroom_per_room",
@@ -15,7 +15,7 @@ DataTransformationConfig = namedtuple("DataTransformationConfig",
 
 ModelTrainerConfig = namedtuple("ModelTrainerConfig",
                                 ["trained_model_file_path",
-                                 "base_accuracy"])
+                                 "base_accuracy", "model_config_file_path"])
 
 ModelEvaluationConfig = namedtuple("ModelEvaluationConfig",
                                    ["model_evaluation_file_path",
@@ -25,4 +25,4 @@ ModelPusherConfig = namedtuple("ModelPusherConfig",
                                ["export_dir_path"])
 
 TrainingPipelineConfig = namedtuple("TrainingPipelineConfig",
-["artifact_dir"])
+                                    ["artifact_dir"])
