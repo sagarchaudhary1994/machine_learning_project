@@ -67,6 +67,7 @@ class DataIngestion:
 
     def split_data_as_train_test(self) -> DataIngestionArtifact:
         try:
+            raise Exception("error")
             raw_data_dir = self.data_ingestion_config.raw_data_dir
 
             # get the file name from raw_data_dir

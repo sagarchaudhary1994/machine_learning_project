@@ -17,8 +17,12 @@ class Housing_Exception(Exception):
         """
         _, _, traceback = error_detail.exc_info()
         file_name = traceback.tb_frame.f_code.co_filename
-        line_num = traceback.tb_frame.f_lineno
-        error_message = f"error occured in script [{file_name}] at line number [{line_num}] error message [{error_message}]"
+        exception_block_line_num = traceback.tb_frame.f_lineno
+        try_block_line_num = traceback.tb_lineno
+        error_message = f"""error occured in script:
+        [{file_name}] at 
+        try_block_line_num [{try_block_line_num}] and exception_block_line_num [{exception_block_line_num}]
+        error message [{error_message}]"""
 
         return error_message
 
