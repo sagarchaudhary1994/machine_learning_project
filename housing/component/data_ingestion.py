@@ -40,12 +40,12 @@ class DataIngestion:
             tgz_file_path = os.path.join(tgz_download_dir, housing_file_name)
 
             logging.info(
-                f"Downloading file from [{download_url}] into dir [{tgz_file_path}]")
+                f"Downloading file from [ {download_url} ] into dir [ {tgz_file_path} ]")
             # download the file
             urllib.request.urlretrieve(download_url, tgz_file_path)
 
             logging.info(
-                f"File: [{tgz_file_path}] has been downloaded successfully")
+                f"File: [ {tgz_file_path} ] has been downloaded successfully")
             return tgz_file_path
 
         except Exception as e:
@@ -58,7 +58,7 @@ class DataIngestion:
                 os.remove(raw_data_dir)
             os.makedirs(raw_data_dir, exist_ok=True)
             logging.info(
-                f"Extracting tgz file: [{tgz_file_path}] into dir [{raw_data_dir}]")
+                f"Extracting tgz file: [ {tgz_file_path} ] into dir [ {raw_data_dir} ]")
             with tarfile.open(tgz_file_path) as housing_tgz_file_obj:
                 housing_tgz_file_obj.extractall(path=raw_data_dir)
             logging.info(f"Extraction completed")
@@ -109,7 +109,7 @@ class DataIngestion:
                     os.makedirs(
                         self.data_ingestion_config.ingested_train_dir, exist_ok=True)
                     logging.info(
-                        f"Exporting training dataset to file: [{train_file_path}]")
+                        f"Exporting training dataset to file: [ {train_file_path} ]")
                     strat_train_set.to_csv(
                         path_or_buf=train_file_path, index=False)
 
@@ -117,14 +117,14 @@ class DataIngestion:
                     os.makedirs(
                         self.data_ingestion_config.ingested_test_dir, exist_ok=True)
                     logging.info(
-                        f"Exporting testing dataset to [{test_file_path}]")
+                        f"Exporting testing dataset to [ {test_file_path} ]")
                     strat_test_set.to_csv(
                         path_or_buf=test_file_path, index=False)
 
                 data_ingestion_artifact = DataIngestionArtifact(train_file_path, test_file_path, True,
                                                                 message="Data ingestion completed successfully")
                 logging.info(
-                    f"Data Ingestion Artifact- [{data_ingestion_artifact}]")
+                    f"Data Ingestion Artifact- [ {data_ingestion_artifact} ]")
                 return data_ingestion_artifact
 
         except Exception as e:

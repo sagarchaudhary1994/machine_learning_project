@@ -129,3 +129,6 @@ Install module to run YAML file in jupyter notebook
 ```
 pip install PyYAML
 ```
+
+Data Drift:
+When your dataset stats got changed over time, we call it as data drift.

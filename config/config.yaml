@@ -15,9 +15,9 @@ data_ingestion_config:
 
 data_validation_config:
   schema_file_name: schema.yaml
-  validation_report_file_name: report.json
-  validation_html_file_name: report_page.html
-  validation_object_file_name: validator
+  schema_dir: config
+  report_file_name: report.json
+  report_page_file_name: report.html
   
 
 data_transformation_config:

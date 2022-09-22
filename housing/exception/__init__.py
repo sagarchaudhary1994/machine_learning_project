@@ -1,5 +1,6 @@
 import os
 import sys
+from housing.logger import logging
 
 
 class Housing_Exception(Exception):
@@ -23,7 +24,7 @@ class Housing_Exception(Exception):
         [{file_name}] at 
         try_block_line_num [{try_block_line_num}] and exception_block_line_num [{exception_block_line_num}]
         error message [{error_message}]"""
-
+        logging.error(error_message)
         return error_message
 
     def __str__(self):

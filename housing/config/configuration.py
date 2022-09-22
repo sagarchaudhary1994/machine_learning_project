@@ -20,19 +20,25 @@ class Configuration:
     def get_data_ingestion_config(self) -> DataIngestionConfig:
         try:
             artifact_dir = self.training_pipeline_config.artifact_dir
+
             data_ingestion_info = self.config_info[DATA_INGESTION_CONFIG_KEY]
+
             dataset_download_url = data_ingestion_info[DATA_INGESTION_DOWNLOAD_URL_KEY]
 
             data_ingestion_artifact_dir = os.path.join(artifact_dir,
                                                        DATA_INGESTION_ARTIFACT_DIR, CURRENT_TIME_STAMP)
             raw_data_dir = os.path.join(
                 data_ingestion_artifact_dir, data_ingestion_info[DATA_INGESTION_RAW_DATA_DIR_KEY])
+
             tgz_download_dir = os.path.join(
                 data_ingestion_artifact_dir, data_ingestion_info[DATA_INGESTION_TGZ_DOWNLOAD_DIR_KEY])
+
             ingested_data_dir = os.path.join(data_ingestion_artifact_dir,
                                              data_ingestion_info[DATA_INGESTION_INGESTED_DIR_NAME_KEY])
+
             ingested_train_dir = os.path.join(
                 ingested_data_dir, data_ingestion_info[DATA_INGESTION_TRAIN_DIR_KEY])
+
             ingested_test_dir = os.path.join(
                 ingested_data_dir,
                 data_ingestion_info[DATA_INGESTION_TEST_DIR_KEY])
@@ -41,7 +47,9 @@ class Configuration:
                 dataset_download_url,
                 tgz_download_dir,
                 raw_data_dir, ingested_train_dir, ingested_test_dir)
+
             logging.info(f"Data Ingestion Config: {data_ingestion_config}")
+
             return data_ingestion_config
         except Exception as e:
             raise Housing_Exception(e, sys)
@@ -49,22 +57,32 @@ class Configuration:
     def get_data_validation_config(self) -> DataValidationConfig:
         try:
             data_validation_info = self.config_info[DATA_VALIDATION_CONFIG_KEY]
+
             artifact_dir = self.training_pipeline_config.artifact_dir
+
             data_validation_artifact_dir = os.path.join(
                 artifact_dir, DATA_VALIDATION_ARTIFACT_DIR, CURRENT_TIME_STAMP)
+
             schema_file_path = os.path.join(
-                data_validation_artifact_dir, data_validation_info[DATA_VALIDATION_SCHEMA_FILE_NAME_KEY])
-            validation_report_file_name = os.path.join(
-                data_validation_artifact_dir, data_validation_info[DATA_VALIDATION_VALIDATION_REPORT_FILE_NAME_KEY])
-            validation_html_file_name = os.path.join(
-                data_validation_artifact_dir, data_validation_info[DATA_VALIDATION_VALIDATION_HTML_FILE_NAME_KEY])
-            validator_obj_file_path = os.path.join(
-                data_validation_artifact_dir, data_validation_info[DATA_VALIDATION_VALIDATION_OBJECT_FILE_NAME_KEY])
+                ROOT_DIR,
+                data_validation_info[DATA_VALIDATION_SCHEMA_DIR_KEY],
+                data_validation_info[DATA_VALIDATION_SCHEMA_FILE_NAME_KEY])
+
+            report_file_name = os.path.join(
+                data_validation_artifact_dir,
+                data_validation_info[DATA_VALIDATION_REPORT_FILE_NAME_KEY])
+
+            report_page_file_path = os.path.join(
+                data_validation_artifact_dir,
+                data_validation_info[DATA_VALIDATION_REPORT_PAGE_FILE_NAME_KEY])
 
             data_validation_config = DataValidationConfig(
-                schema_file_path, validation_report_file_name, validation_html_file_name, validator_obj_file_path)
+                schema_file_path, report_file_name, report_page_file_path)
+
             logging.info(f"Data Validation Config- {data_validation_config}")
+
             return data_validation_config
+
         except Exception as e:
             raise Housing_Exception(e, sys)
 
