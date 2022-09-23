@@ -1,6 +1,4 @@
-from operator import index
 import os
-import profile
 import sys
 from housing.entity.config_entity import DataValidationConfig
 from housing.entity.artifact_entity import DataIngestionArtifact, DataValidationArtifact

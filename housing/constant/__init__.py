@@ -61,3 +61,9 @@ MODEL_EVALUATION_FILE_NAME_KEY = "model_evaluation_file_name"
 # Model pushed related variables
 MODEL_PUSHER_CONFIG_KEY = "model_pusher_config"
 MODEL_PUSHER_MODEL_EXPORT_DIR_KEY = "model_export_dir"
+
+
+# Other Important Constants
+DATASET_SCHEMA_COLUMNS_KEY = "columns"
+DATASET_SCHEMA_TARGET_COLUMN_KEY = "target_column"
+DATASET_SCHEMA_DOMAIN_VALUE_KEY = "domain_value"

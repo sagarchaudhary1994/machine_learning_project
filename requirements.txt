@@ -6,4 +6,5 @@ pandas
 PyYAML
 six
 evidently
+dill
 -e .

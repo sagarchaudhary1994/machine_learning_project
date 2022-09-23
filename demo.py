@@ -7,7 +7,7 @@ from housing.config.configuration import Configuration
 def main():
     pipeline = Pipeline()
     pipeline.run_pipeline()
-    # val_config = Configuration().get_data_validation_config()
+    # val_config = Configuration().get_data_transformation_config()
     # print(val_config)
 
 
