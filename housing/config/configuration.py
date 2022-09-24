@@ -95,20 +95,20 @@ class Configuration:
                 artifact_dir, DATA_TRANSFORMATION_ARTIFACT_DIR, CURRENT_TIME_STAMP)
 
             add_bedroom_per_room = data_transformation_info[DATA_TRANSFORMATION_ADD_BEDROOM_PER_ROOM_KEY]
-            
+
             transformed_dir = os.path.join(
-                data_transformation_artifact_dir, 
+                data_transformation_artifact_dir,
                 data_transformation_info[DATA_TRANSFORMATION_TRANSFORMED_DIR_KEY])
             transformed_train_dir = os.path.join(
                 transformed_dir, data_transformation_info[DATA_TRANSFORMATION_TRANSFORMED_TRAIN_DIR_KEY])
             transformed_test_dir = os.path.join(
                 transformed_dir, data_transformation_info[DATA_TRANSFORMATION_TRANSFORMED_TEST_DIR_KEY])
-            
+
             preprocessed_dir = os.path.join(
                 artifact_dir, data_transformation_info[DATA_TRANSFORMATION_PREPROCESSING_DIR_KEY])
             preprocessed_object_file_path = os.path.join(
                 preprocessed_dir, data_transformation_info[DATA_TRANSFORMATION_PREPROCESSED_FILE_NAME_KEY])
-            
+
             data_transformation_config = DataTransformationConfig(
                 add_bedroom_per_room,
                 transformed_train_dir,
@@ -123,18 +123,23 @@ class Configuration:
     def get_model_trainer_config(self) -> ModelTrainerConfig:
         try:
             model_trainer_info = self.config_info[MODEL_TRAINER_CONFIG_KEY]
+
             artifact_dir = self.training_pipeline_config.artifact_dir
             model_trainer_artifact_dir = os.path.join(
                 artifact_dir, MODEL_TRAINER_ARTIFACT_DIR, CURRENT_TIME_STAMP)
+
             base_accuracy = model_trainer_info[MODEL_TRAINER_BASE_ACCURACY_KEY]
+
             trained_model_dir = os.path.join(
                 model_trainer_artifact_dir, MODEL_TRAINER_TRAINED_MODEL_DIR_KEY)
             trained_model_file_path = os.path.join(
                 trained_model_dir, model_trainer_info[MODEL_TRAINER_MODEL_FILE_NAME_KEY])
+
             model_config_dir = os.path.join(
-                model_trainer_artifact_dir, MODEL_TRAINER_MODEL_CONFIG_DIR_KEY)
+                ROOT_DIR, model_trainer_info[MODEL_TRAINER_MODEL_CONFIG_DIR_KEY])
             model_config_file_path = os.path.join(
                 model_config_dir, model_trainer_info[MODEL_TRAINER_MODEL_CONFIG_FILE_KEY])
+
             model_trainer_config = ModelTrainerConfig(
                 trained_model_file_path, base_accuracy, model_config_file_path)
             logging.info(f"Model Trainer Config- {model_trainer_config}")

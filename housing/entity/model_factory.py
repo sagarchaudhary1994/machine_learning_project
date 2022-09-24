@@ -68,7 +68,7 @@ def get_sample_model_config_yaml_file(export_dir: str) -> str:
 
     """
     try:
-        model_configuration = {
+        model_configuration: dict = {
             GRID_SEARCH_KEY: {
                 MODULE_KEY: "sklearn.model_selection",
                 CLASS_KEY: "GridSearchCV",
@@ -92,11 +92,11 @@ def get_sample_model_config_yaml_file(export_dir: str) -> str:
                 }
             }
         }
-
+        # print(type(model_configuration))
         os.makedirs(export_dir, exist_ok=True)
         export_file_path = os.path.join(export_dir, "model.yaml")
 
-        with open(export_file_path, "wb") as file_obj:
+        with open(export_file_path, "w") as file_obj:
             yaml.dump(model_configuration, file_obj)
 
         return export_file_path
@@ -254,7 +254,7 @@ class ModelFactory:
         """
         try:
             return self.execute_grid_search_operation(
-                initialized_model=InitializedModelDetail,
+                initialized_model=intitialized_model,
                 input_feature=input_feature,
                 output_feature=output_feature
             )
@@ -313,7 +313,8 @@ class ModelFactory:
                     base_accuracy = grid_searched_model.best_score
                     best_model = grid_searched_model
                     logging.info(f"Acceptable model found: [ {best_model} ]")
-            if not best_model:
+
+            if best_model is None:
                 raise Exception(
                     f"None of the model has the base accuracy: [{base_accuracy}]")
             logging.info(f"Best Model: [ {best_model} ]")
