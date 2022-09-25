@@ -337,4 +337,4 @@ class DataTransformation:
             raise Housing_Exception(e, sys) from e
 
     def __del__(self):
-        logging.info(f"{'=*20'} Data Transformation Completed. {'=*20'}")
+        logging.info(f"{'='*20} Data Transformation Completed. {'='*20}")

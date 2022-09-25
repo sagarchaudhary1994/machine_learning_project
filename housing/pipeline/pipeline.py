@@ -1,7 +1,9 @@
 from housing.component.data_transformation import DataTransformation
 from housing.component.model_evaluation import ModelEvaluation
+from housing.component.model_pusher import ModelPusher
 from housing.config.configuration import Configuration
 from housing.constant import DATA_TRANSFORMATION_CONFIG_KEY, MODEL_TRAINER_CONFIG_KEY
+from housing.entity.config_entity import ModelPusherConfig
 from housing.logger import logging
 from housing.exception import Housing_Exception
 from housing.entity.artifact_entity import DataIngestionArtifact, DataTransformationArtifact, DataValidationArtifact,\
@@ -58,12 +60,12 @@ class Pipeline:
         except Exception as e:
             raise Housing_Exception(e, sys) from e
 
-    def start_model_evaluation(self,data_ingestion_artifact: DataIngestionArtifact,
-    data_validation_artifact:DataValidationArtifact,
-    model_trainer_artifact: ModelTrainerArtifact):
+    def start_model_evaluation(self, data_ingestion_artifact: DataIngestionArtifact,
+                               data_validation_artifact: DataValidationArtifact,
+                               model_trainer_artifact: ModelTrainerArtifact):
         try:
             model_evaluation = ModelEvaluation(
-                model_evaluation_config= self.config.get_model_evaluation_config(),
+                model_evaluation_config=self.config.get_model_evaluation_config(),
                 data_ingestion_artifact=data_ingestion_artifact,
                 data_validation_artifact=data_validation_artifact,
                 model_trainer_artifact=model_trainer_artifact)
@@ -73,11 +75,15 @@ class Pipeline:
         except Exception as e:
             raise Housing_Exception(e, sys) from e
 
-    def start_model_pusher(self):
+    def start_model_pusher(self, model_evaluation_artifact: ModelTrainerArtifact):
         try:
-            pass
+            self.model_pusher_config: ModelPusherConfig = self.config.get_model_pusher_config()
+            model_pusher = ModelPusher(model_pusher_config=self.model_pusher_config,
+                                       model_evaluation_artifact=model_evaluation_artifact)
+
+            return model_pusher.initiate_model_pusher()
         except Exception as e:
-            raise Housing_Exception(sys, e) from e
+            raise Housing_Exception(e, sys) from e
 
     def run_pipeline(self):
         try:
@@ -97,12 +103,16 @@ class Pipeline:
             model_trainer_artifact = self.start_model_trainer(
                 data_transformation_artifact=data_tranformation_artifact)
 
-            #model evaluation
+            # model evaluation
             model_evaluation_artifact = self.start_model_evaluation(
                 data_ingestion_artifact=data_ingestion_artifact,
                 data_validation_artifact=data_validation_artifact,
                 model_trainer_artifact=model_trainer_artifact
             )
 
+            # model pusher
+            model_pusher_artifact = self.start_model_pusher(
+                model_evaluation_artifact=model_evaluation_artifact
+            )
         except Exception as e:
             raise Housing_Exception(e, sys) from e
