@@ -75,7 +75,7 @@ class HousingPredictor:
             folder_name = list(map(int, os.listdir(self.model_dir)))
             latest_model_dir = os.path.join(
                 self.model_dir, f"{max(folder_name)}")
-            file_name = os.listdir(self.model_dir)[0]
+            file_name = os.listdir(latest_model_dir)[0]
             latest_model_path = os.path.join(latest_model_dir, file_name)
             logging.info(f"Latest Model File Path- [ {latest_model_path} ]")
             return latest_model_path

@@ -170,7 +170,7 @@ class Configuration:
             model_pusher_info = self.config_info[MODEL_PUSHER_CONFIG_KEY]
             artifact_dir = self.training_pipeline_config.artifact_dir
             export_dir_path = os.path.join(
-                artifact_dir, model_pusher_info[MODEL_PUSHER_MODEL_EXPORT_DIR_KEY], CURRENT_TIME_STAMP)
+                artifact_dir, model_pusher_info[MODEL_PUSHER_MODEL_EXPORT_DIR_KEY], CURRENT_TIME_STAMP.replace("-",""))
             model_pusher_config = ModelPusherConfig(export_dir_path)
             logging.info(f"Model Pusher Config- {model_pusher_config}")
             return model_pusher_config

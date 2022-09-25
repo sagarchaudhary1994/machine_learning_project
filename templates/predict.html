@@ -1,0 +1,130 @@
+{%extends 'header.html'%}
+
+{%block head%}
+<title>Housing Estimator</title>
+{%endblock%}
+
+{%block content%}
+<div class="row" style="margin-bottom:10px;">
+<div class="col-md-6 col-lg-6">
+    <form action="/predict" method="POST"> 
+        <legend>Housing Estimation Form</legend>
+        <div class="mb-3">
+          <label for="longitude" class="form-label">Longitude</label>
+          <input type="text" class="form-control" id="longitude" aria-describedby="longitude" name="longitude" required
+          placeholder="Enter a value for longitude">
+        </div>
+
+        <div class="mb-3">
+            <label for="latitude" class="form-label">Latitude</label>
+            <input type="text" class="form-control" id="latitude" aria-describedby="latitude" name="latitude" required
+            placeholder="Enter a value for latitude">
+          </div>
+
+        <div class="mb-3">
+            <label for="housingmedianage" class="form-label">Housing Median Age</label>
+            <input type="text" class="form-control" id="housingmedianage" aria-describedby="housingmedianage" name="housingmedianage" required
+            placeholder="Enter a value for housing median age">
+        </div>
+        <div class="mb-3">
+            <label for="totalrooms" class="form-label">Total Rooms</label>
+            <input type="text" class="form-control" id="totalrooms" aria-describedby="totalrooms" name="totalrooms" required
+            placeholder="Enter a value for total rooms">
+        </div>
+        <div class="mb-3">
+            <label for="totalbedrooms" class="form-label">Total Bedrooms</label>
+            <input type="text" class="form-control" id="totalbedrooms" aria-describedby="totalbedrooms" name="totalbedrooms" required
+            placeholder="Enter a value for total bedrooms">
+        </div>
+        <div class="mb-3">
+            <label for="population" class="form-label">Population</label>
+            <input type="text" class="form-control" id="population" aria-describedby="population" name="population" required
+            placeholder="Enter a value for population">
+        </div>
+        <div class="mb-3">
+            <label for="households" class="form-label">Households</label>
+            <input type="text" class="form-control" id="households" aria-describedby="households" name="households" required
+            placeholder="Enter a value for households">
+        </div>
+        <div class="mb-3">
+            <label for="medianincome" class="form-label">Median Income</label>
+            <input type="text" class="form-control" id="latitude" aria-describedby="medianincome" name="medianincome" required
+            placeholder="Enter a value for median income">
+        </div>
+        
+        <div class="mb-3">
+            <label for="oceanproximity" class="form-label">Ocean Proximity</label>
+            <select class="form-control" name="oceanproximity" id="oceanproximity">
+                <option value="<1H OCEAN">&lt;1H OCEAN</option>
+                <option value="INLAND">INLAND</option>
+                <option value="ISLAND">ISLAND</option>
+                <option value="NEAR BAY">NEAR BAY</option>
+                <option value="NEAR OCEAN">NEAR OCEAN</option>
+              </select>
+        </div>
+        <div class="mb-3"></div>
+        <button type="submit" class="btn btn-primary">Predict median house value</button>
+        </div>
+      </form>
+      <div class="col-md-6 col-lg-6">
+        <div class="card cardMain">
+            <div class="card-header cardHeader">
+               California House Price
+            </div>
+            <div class="card-body cardBody">
+                {%if context["housing_data"] is not none%}
+                <table class="table table-striped">
+                    <thead>
+                      <tr>
+                        <th scope="col">Input Feature</th>
+                        <th scope="col">Feature Value</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                    {%for column, value in context['housing_data'].items()%}
+                      <tr>
+                        {%if column =='median_house_value'%}
+                        <td class="pred-row">{{column}}</td>
+                        <td class="pred-row">{{context['median_house_value']}}</td>
+                        {%else%}
+                        <td>{{column}}</td>
+                        <td>{{value[0]}}</td>
+                        {%endif%}
+                      </tr>
+                    {%endfor%}
+                    </tbody>
+                  </table>
+                  {%else%}
+                  <h5 class="card-title">Submit Form</h5>
+                  <p class="card-text">Kindly provide necessary information to estimate housing price in California</p>
+                  <a href="/" class="btn btn-primary">Return to Home</a>
+                {%endif%}
+                
+            </div>
+          </div>
+    </div>
+</div>
+
+
+</div>
+<style>
+    .pred-row{
+        background-color: blue;
+        color: white;
+    }
+    .cardBody{
+        align-items: center;
+        padding: 0px;
+    }
+
+    .cardMain{
+        overflow:hidden;
+    }
+
+    .cardHeader{
+        text-align: center;
+        font-weight:bolder;
+    }
+</style>
+
+{%endblock%}
