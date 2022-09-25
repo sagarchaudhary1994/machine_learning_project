@@ -150,11 +150,14 @@ class Configuration:
     def get_model_evaluation_config(self) -> ModelEvaluationConfig:
         try:
             model_evaluation_info = self.config_info[MODEL_EVALUATION_CONFIG_KEY]
+            
             artifact_dir = self.training_pipeline_config.artifact_dir
             model_evaluation_artifact_dir = os.path.join(
                 artifact_dir, MODEL_EVALUATION_ARTIFACT_DIR, CURRENT_TIME_STAMP)
+
             model_evaluation_file_path = os.path.join(
                 model_evaluation_artifact_dir, model_evaluation_info[MODEL_EVALUATION_FILE_NAME_KEY])
+
             model_evaluation_config = ModelEvaluationConfig(
                 model_evaluation_file_path, CURRENT_TIME_STAMP)
             logging.info(f"Model Evaluation Config- {model_evaluation_config}")
